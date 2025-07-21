@@ -24,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <div>{children}</div>
+      <body className={` text-white`}>
+        <main className="flex min-h-screen flex-col bg-black">
+          <div className="flex-grow">{children}</div>
+        </main>
+      </body>
     </html>
   );
 }
