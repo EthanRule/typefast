@@ -1,9 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GetChatGPTText from "../api/chatgpt/chatgpt";
 
 export default function ChatEntry() {
   const [value, setValue] = useState("");
+  const [modelText, setModelText] = useState("");
+
+  useEffect(() => {
+    if (modelText) {
+      try {
+        console.log(JSON.parse(modelText));
+      } catch {
+        console.log(modelText);
+      }
+    }
+  }, [modelText]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -13,7 +24,8 @@ export default function ChatEntry() {
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === "Enter") {
-      await GetChatGPTText(value);
+      const data = await GetChatGPTText(value);
+      setModelText(data);
     }
   };
 

@@ -5,6 +5,5 @@ export default async function GetChatGPTText(input: string) {
     body: JSON.stringify({ input }),
   });
   const data = await res.json();
-  console.log(data);
   return data.output;
 }
